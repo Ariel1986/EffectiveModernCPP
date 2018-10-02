@@ -1,0 +1,16 @@
+会发生类型推导的情况：1）调用函数模板，2）auto，3）decltype表达式，4）C++14中，decltype(auto)
+#### Item 1: 理解模板类型推导（understand template type deduction)
+模板类型推导是auto类型推导的基础
+'''
+template <typename T>
+void f(paramType param);
+
+//如下调用上面的函数
+f(expr);  //call f with some expression
+'''
+* 模板类型推导有如下三种情况:
+  ＋ paramType是pointer或者reference类型，但不是universal reference类型
+  ＋ paramType是universal reference类型
+  ＋ paramType既不是pointer也不是reference类型
+* case1: paramType是pointer或者reference类型，但不是universal reference类型
+ ＋如果表达式是reference，忽略reference部分，使用引用对象的类型决定T的类型
